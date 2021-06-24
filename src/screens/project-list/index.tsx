@@ -7,17 +7,21 @@ import { useDebounce } from "utils";
 import { useProject } from "utils/project";
 import { useUsers } from "utils/user";
 import { Typography } from "antd";
+import { ScreenContainer } from "components/lib";
+import { useUrlQueryParam } from "utils/url";
 
 export const ProjectListScreen = () => {
-  const [param, setParam] = useState({
-    name: "",
-    personId: "",
-  });
+  // const [, setParam] = useState({
+  //   name: "",
+  //   personId: "",
+  // });
+  const [keys] = useState<("name" | "personId")[]>(["name", "personId"]);
+  const [param, setParam] = useUrlQueryParam(keys);
   const debouncedParam = useDebounce(param, 200);
   const { isLoading, error, data: list } = useProject(debouncedParam);
   const { data: users } = useUsers();
   return (
-    <div>
+    <ScreenContainer>
       <SearchPanel
         param={param}
         setParam={setParam}
@@ -31,6 +35,7 @@ export const ProjectListScreen = () => {
         dataSource={list || []}
         users={users || []}
       ></List>
-    </div>
+    </ScreenContainer>
   );
 };
+ProjectListScreen.whyDidYouRender = true;

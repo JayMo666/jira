@@ -4,7 +4,7 @@ export const isVoid = (value: unknown) =>
   value === undefined || value === null || value === "";
 
 // 不用object
-export const clearObject = (object: { [key: string]: unknown }) => {
+export const cleanObject = (object: { [key: string]: unknown }) => {
   const result = { ...object };
   Object.keys(object).forEach((key) => {
     const value = object[key];
@@ -45,3 +45,10 @@ export const useArray = <T>(arr: T[]) => {
   };
   return { value, clear, removeIndex, add };
 };
+
+export const useDocumentTitle = (title: string) => {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+};
+export const resetRoute = () => (window.location.href = window.location.origin);
