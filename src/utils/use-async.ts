@@ -36,14 +36,24 @@ export const useAsync = <T>(
       data: null,
     });
   };
+  const [retry, setRetry] = useState(() => () => {});
+
   // run用来触发异步请求
-  const run = (promise: Promise<T>) => {
+  const run = (
+    promise: Promise<T>,
+    runConfig?: { retry: () => Promise<T> }
+  ) => {
     if (!promise || !promise.then) {
       throw new Error("请传入promise 类型数据");
     }
     setState({
       ...state,
       stat: "loading",
+    });
+    setRetry(() => () => {
+      if (runConfig?.retry) {
+        run(runConfig?.retry(), runConfig);
+      }
     });
     return promise
       .then((data) => {
@@ -67,6 +77,7 @@ export const useAsync = <T>(
     run,
     setData,
     setError,
+    retry,
     ...state,
   };
 };

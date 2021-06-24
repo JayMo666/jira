@@ -12,7 +12,8 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {
       return keys.reduce((prev, key) => {
         return { ...prev, [key]: searchParams.get(key) };
       }, {} as { [key in K]: string });
-    }, [searchParams, keys]),
+      // eslint-disable-next-line
+    }, [searchParams]),
     (params: Partial<{ [key in K]: unknown }>) => {
       const o = cleanObject({
         ...Object.fromEntries(searchParams),

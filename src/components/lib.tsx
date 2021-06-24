@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Button, Typography } from "antd";
-import { loadDevTools } from "jira-dev-tool";
 
 export const Row = styled.div<{
   gap?: number | boolean;
