@@ -9,7 +9,8 @@ import { Navigate, Route, Routes } from "react-router";
 import { ProjectScreen } from "screens/project";
 import { resetRoute } from "utils";
 // import { ProjectModal } from "screens/project-list/project-modal";
-// import { ProjectPopover } from "components/project-popover";
+import { ProjectPopover } from "components/project-popover";
+import { ProjectModal } from "screens/project-list/project-modal";
 // import { UserPopover } from "components/user-popover";
 
 /**
@@ -37,7 +38,7 @@ export const AuthenticatedApp = () => {
           <Navigate to={"/projects"} />
         </Routes>
       </Main>
-      {/* <ProjectModal /> */}
+      <ProjectModal />
     </Container>
   );
 };
@@ -49,7 +50,7 @@ const PageHeader = () => {
         <ButtonNoPadding type={"link"} onClick={resetRoute}>
           <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
         </ButtonNoPadding>
-        {/* <ProjectPopover /> */}
+        <ProjectPopover />
         {/* <UserPopover /> */}
       </HeaderLeft>
       <HeaderRight>
